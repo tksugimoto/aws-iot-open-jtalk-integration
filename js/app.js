@@ -49,11 +49,12 @@ or in the "license" file accompanying this file. This file is distributed on an 
 
   /** controller of the app */
   function AppController(scope){
-    this.clientId = 'someClientId';
-    this.endpoint = null;
-    this.accessKey = null;
-    this.secretKey = null;
-    this.regionName = 'us-east-1';
+    const searchParams = new URLSearchParams(location.hash.slice(1));
+    this.clientId = searchParams.get('clientId') || 'someClientId';
+    this.endpoint = searchParams.get('endpoint');
+    this.accessKey = searchParams.get('accessKey');
+    this.secretKey = searchParams.get('secretKey');
+    this.regionName = searchParams.get('regionName') || 'us-east-1';
     this.logs = new LogService();
     this.clients = new ClientControllerCache(scope, this.logs);
   }
@@ -68,6 +69,8 @@ or in the "license" file accompanying this file. This file is distributed on an 
       secretKey: this.secretKey,
       regionName: this.regionName
     };
+    const searchParams = new URLSearchParams(options);
+    location.hash = searchParams.toString();
     var client = this.clients.getClient(options);
     if (!client.connected) {
       client.connect(options);
