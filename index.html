@@ -21,6 +21,10 @@
           <label for="regionInput">Region: </label>
           <input type="text" class="form-control" id="regionInput" placeholder="region" ng-model="vm.regionName">
         </div>
+        <div class="form-group">
+          <label for="openJTalkUrlInput">Open JTalk Web API URL: </label>
+          <input type="text" class="form-control" id="openJTalkUrlInput" placeholder="http://localhost:8080/voice" ng-model="vm.openJTalkUrl">
+        </div>
       </div>
       <div class="col-md-6">
         <div class="input-group">
@@ -57,10 +61,6 @@
             </div>
             <button class="btn btn-primary" ng-click="clientCtr.subscribe()">Subscribe</button>
           </div>
-          <div>
-            <p>Press enter in the text box to send message to topic : {{clientCtr.topicName}} </p>
-            <textarea id="messageInput" ng-disabled="!clientCtr.topicName" ng-model="clientCtr.message" placeholder="message to send" ng-keyup="clientCtr.msgInputKeyUp($event)"></textarea>
-          </div>
         </div>
         <div class="col-md-6">
           <div class="panel panel-info" ng-repeat="msg in clientCtr.msgs">
@@ -68,6 +68,7 @@
               <h3 class="panel-title">{{msg.destination}} -> {{msg.receivedTime | date: 'medium'}}</h3>
             </div>
             <div class="panel-body"> {{msg.content}} </div>
+            <audio ng-src="{{ vm.openJTalkUrl + '?text=' + msg.encodedContent | trustAsResourceUrl }}" autoplay controls></audio>
           </div>
         </div>
       </div>
