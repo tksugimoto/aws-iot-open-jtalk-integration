@@ -6,11 +6,12 @@
   </head>
   <body>
     <div class="container" ng-app="awsiot.sample" ng-controller="AppController as vm">
-      <h1>MQTT Client</h1>
+      <h1>AWS IoT のトピックに流れてきたメッセージを <a href="http://open-jtalk.sourceforge.net/">Open JTalk</a> で再生する</h1>
       <div class="jumbotron">
-        <p>Find your custom endpoint in the <a href="https://console.aws.amazon.com/iot/home?region=us-east-1#/dashboard/help" target="_blank">iot console</a> or run the command <kbd>aws iot describe-endpoint</kbd>. The IAM credentials(the access key and secret key below) must associate with a policy that has access rights to IoT services(action: <kbd>iot:*</kbd>, resource: <kbd>*</kbd>).
-      </p>
-    </div>
+        <p>
+          準備など詳細→ <a href="./README.md">README.md</a>
+        </p>
+      </div>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
